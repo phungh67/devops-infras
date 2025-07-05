@@ -1,3 +1,4 @@
 Terraform/environments/*/.terraform/*
 Terraform/environments/*/.terraform*
 Terraform/environments/*/plan*
+Terraform/environments/*/*.state
