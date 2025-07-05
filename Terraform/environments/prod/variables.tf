@@ -1,3 +1,12 @@
+# backend remote - s3
+variable "backend_bucket" {
+  description = "The default bucket for storing Terraform state"
+  type        = string
+  default     = "deu1-state-bucket"
+}
+
+# DynamoDB table (if have) to lock state
+
 variable "main_region" {
   description = "The main region to provide resources or the region which management resources are placed"
   type        = string
