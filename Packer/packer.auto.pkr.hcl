@@ -7,6 +7,10 @@ packer {
   }
 }
 
+variables {
+  
+}
+
 source "amazon-ebs" "ubuntu" {
   ami_name      = "learn-packer-linux-aws"
   instance_type = "t2.micro"
