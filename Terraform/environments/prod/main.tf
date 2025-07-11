@@ -5,6 +5,6 @@ module "aws_networking" {
 }
 
 module "aws_sg" {
-  source = "../../modules/aws-sg"
+  source      = "../../modules/aws-sg"
   main_vpc_id = module.aws_networking.main_vpc_id
 }
