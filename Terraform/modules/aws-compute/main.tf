@@ -37,3 +37,17 @@ resource "aws_instance" "nat_instance" {
     "Type"  = local.Type
   }
 }
+
+### Routing for NAT instance
+
+resource "aws_route" "internet_private_route" {
+  route_table_id         = var.private_route_table_id
+  network_interface_id   = aws_instance.nat_instance.primary_network_interface_id
+  destination_cidr_block = "0.0.0.0/0"
+}
+
+resource "aws_route_table_association" "private_association" {
+  count          = length(var.private_subnets_list)
+  subnet_id      = element(ar.private_subnets_list[*], count.index)
+  route_table_id = var.private_route_table_id
+}

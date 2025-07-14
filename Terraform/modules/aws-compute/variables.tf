@@ -63,3 +63,9 @@ variable "was_common_sg" {
   description = "Security group allows communication between bastion and other servers"
   type        = string
 }
+
+# for configuring NAT instance and routing for private instances
+variable "private_route_table_id" {
+  description = "Output from network module"
+  type        = string
+}

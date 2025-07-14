@@ -68,3 +68,12 @@ resource "aws_route_table_association" "public_association" {
   subnet_id      = element(aws_subnet.public_subnets[*].id, count.index)
   route_table_id = aws_route_table.pub_route_table.id
 }
+
+resource "aws_route_table" "pri_route_table" {
+  vpc_id = aws_vpc.main_vpc.id
+  tags = {
+    "Name" = "${var.res_prefix}-pri-route-table"
+    "Owner" = local.Owner
+    "Type" = local.Type
+  }
+}

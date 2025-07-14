@@ -13,3 +13,7 @@ output "private_subnets_list" {
     private_subets_ids = flatten([for i in aws_subnet.private_subnets[*] : i.id[*]])
   }
 }
+
+output "private_route_table_id" {
+  value = aws_route_table.pri_route_table.id
+}
