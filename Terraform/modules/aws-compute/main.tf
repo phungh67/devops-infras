@@ -48,6 +48,6 @@ resource "aws_route" "internet_private_route" {
 
 resource "aws_route_table_association" "private_association" {
   count          = length(var.private_subnets_list)
-  subnet_id      = element(ar.private_subnets_list[*], count.index)
+  subnet_id      = element(var.private_subnets_list[*], count.index)
   route_table_id = var.private_route_table_id
 }

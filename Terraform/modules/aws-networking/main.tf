@@ -72,8 +72,20 @@ resource "aws_route_table_association" "public_association" {
 resource "aws_route_table" "pri_route_table" {
   vpc_id = aws_vpc.main_vpc.id
   tags = {
-    "Name" = "${var.res_prefix}-pri-route-table"
+    "Name"  = "${var.res_prefix}-pri-route-table"
     "Owner" = local.Owner
-    "Type" = local.Type
+    "Type"  = local.Type
+  }
+}
+
+resource "aws_lb" "main_public_traffic" {
+  name               = "${var.res_prefix}-main-pub-alb"
+  internal           = false
+  load_balancer_type = var.lb_type[0]
+  subnets            = [for subnet in aws_subnet.public_subnets : subnet.id]
+  tags = {
+    "Name"  = "${var.res_prefix}-main-pub-alb"
+    "Owner" = local.Owner
+    "Type"  = local.Type
   }
 }
