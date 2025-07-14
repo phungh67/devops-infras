@@ -7,3 +7,9 @@ output "public_subnets_list" {
     public_subets_ids = flatten([for i in aws_subnet.public_subnets[*] : i.id[*]])
   }
 }
+
+output "private_subnets_list" {
+  value = {
+    private_subets_ids = flatten([for i in aws_subnet.private_subnets[*] : i.id[*]])
+  }
+}
