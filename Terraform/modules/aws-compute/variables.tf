@@ -69,3 +69,9 @@ variable "private_route_table_id" {
   description = "Output from network module"
   type        = string
 }
+
+# for KMS
+variable "aws_kms_ecs_key" {
+  description = "Key for ECS service"
+  type        = string
+}

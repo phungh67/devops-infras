@@ -51,3 +51,30 @@ resource "aws_route_table_association" "private_association" {
   subnet_id      = element(var.private_subnets_list[*], count.index)
   route_table_id = var.private_route_table_id
 }
+
+resource "aws_cloudwatch_log_group" "ecs_log_group" {
+  name = "${var.res_prefix}-ecs-logs"
+  tags = {
+    "Owner" = local.Owner
+    "Type"  = local.Type
+  }
+}
+
+resource "aws_ecs_cluster" "main-cluster" {
+  name = "${var.res_prefix}-main-cluster"
+  configuration {
+    execute_command_configuration {
+      kms_key_id = var.aws_kms_ecs_key
+      logging    = "OVERRIDE"
+      log_configuration {
+        cloud_watch_encryption_enabled = true
+        cloud_watch_log_group_name     = aws_cloudwatch_log_group.ecs_log_group.name
+      }
+    }
+  }
+  tags = {
+    "Name"  = "${var.res_prefix}-main-cluster"
+    "Owner" = local.Owner
+    "Type"  = local.Type
+  }
+}
