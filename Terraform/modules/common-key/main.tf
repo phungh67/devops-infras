@@ -12,3 +12,14 @@ resource "aws_key_pair" "common-key" {
     "Type"  = "IaC"
   }
 }
+
+resource "aws_kms_key" "ecs-main-key" {
+  description             = "This key is used for data encryption within ECS scope."
+  deletion_window_in_days = 7
+
+  tags = {
+    "Name"  = "${var.res_prefix}-ecs-kms-key"
+    "Owner" = "huyhoang.ph"
+    "Type"  = "IaC"
+  }
+}
