@@ -16,7 +16,7 @@ variable "main_region" {
 variable "az_list" {
   description = "The az that are associated with the region above"
   type        = list(string)
-  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  default     = ["us-east-1a"]
 }
 
 variable "res_prefix" {
@@ -34,19 +34,19 @@ variable "main_cidr" {
 variable "private_subnets_cidr" {
   description = "CIDR for several private subnets, default is a set of 3"
   type        = list(string)
-  default     = ["10.0.11.0/24", "10.0.21.0/24", "10.0.31.0/24"]
+  default     = ["10.0.11.0/24", "10.0.21.0/24"]
 }
 
 variable "public_subnets_cidr" {
   description = "CIDR for several public subnets, default is a set of 3"
   type        = list(string)
-  default     = ["10.0.10.0/24", "10.0.20.0/24", "10.0.30.0/24"]
+  default     = ["10.0.10.0/24", "10.0.20.0/24"]
 }
 
 variable "database_subnets_cidr" {
   description = "CIDR for several database subnets, default is a set of 3"
   type        = list(string)
-  default     = ["10.0.12.0/24", "10.0.22.0/24", "10.0.32.0/24"]
+  default     = ["10.0.12.0/24"]
 }
 
 variable "default_instance_types" {

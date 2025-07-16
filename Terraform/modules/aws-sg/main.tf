@@ -1,8 +1,11 @@
 locals {
-  common_http_ports = [8080, 80, 443]
+  common_http_ports = [80, 443]
   common_protocol   = "tcp"
   ssh_port          = 22
-  Owner             = "huyhoang.ph"
+  jenkins_port     = 8080
+  sql_port         = 3306
+  app_cluster_port = 5000
+  Owner             = "hung.nm"
   Type              = "IaC"
 }
 
@@ -27,12 +30,14 @@ resource "aws_vpc_security_group_egress_rule" "internet_egress_rule" {
   to_port           = element(local.common_http_ports, count.index)
 }
 
-resource "aws_security_group" "bastion_common_sg" {
-  name        = "deu1-bastion-common-sg"
-  description = "Allow bastion to ssh to other machines within VPC and also allow remotely control from operators"
+resource "aws_security_group" "alb_app_sg" {
+  name        = "app_cluster_port = 5000"
+  description = "Allow traffic from Internet to the ALB"
   vpc_id      = var.main_vpc_id
+
+
   tags = {
-    "Name"  = "deu1-bastion-common-sg"
+    "Name"  = "app_cluster_port = 5000"
     "Owner" = local.Owner
     "Type"  = local.Type
   }
@@ -42,6 +47,10 @@ resource "aws_security_group" "was_common_sg" {
   name        = "deu1-was-common-sg"
   description = "Default sg attached to all web application servers (WAS)"
   vpc_id      = var.main_vpc_id
+  from_port         = local.ssh_port
+  ip_protocol       = local.common_protocol
+  to_port           = local.ssh_port
+
   tags = {
     "Name"  = "deu1-was-common-sg"
     "Owner" = local.Owner

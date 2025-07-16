@@ -1,5 +1,5 @@
 locals {
-  Owner = "huyhoang.ph"
+  Owner = "hung.nm"
   Type  = "IaC"
 }
 
@@ -68,3 +68,4 @@ resource "aws_route_table_association" "public_association" {
   subnet_id      = element(aws_subnet.public_subnets[*].id, count.index)
   route_table_id = aws_route_table.pub_route_table.id
 }
+
