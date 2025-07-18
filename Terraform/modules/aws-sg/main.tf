@@ -102,7 +102,7 @@ resource "aws_vpc_security_group_ingress_rule" "nat_accept_traffic_from_was" {
   count                        = length(local.common_http_ports)
   security_group_id            = aws_security_group.nat_basic_sg.id
   description                  = "Allow traffic from WAS to be forwared at NAT"
-  referenced_security_group_id = aws_security_group.nat_basic_sg
+  referenced_security_group_id = aws_security_group.nat_basic_sg.id
   from_port                    = element(local.common_http_ports, count.index)
   ip_protocol                  = local.common_protocol
   to_port                      = element(local.common_http_ports, count.index)

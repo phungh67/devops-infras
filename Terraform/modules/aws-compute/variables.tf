@@ -71,7 +71,7 @@ variable "private_route_table_id" {
 }
 
 # for KMS
-variable "aws_kms_ecs_key" {
-  description = "Key for ECS service"
-  type        = string
-}
+# variable "aws_kms_ecs_key" {
+#   description = "Key for ECS service"
+#   type        = string
+# }
