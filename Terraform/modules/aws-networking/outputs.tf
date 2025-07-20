@@ -3,11 +3,11 @@ output "main_vpc_id" {
 }
 
 output "public_subnets_list" {
-  value = [for s in aws_subnet.public_subnets : s.id[*]]
+  value = aws_subnet.public_subnets[*].id
 }
 
 output "private_subnets_list" {
-  value = [for s in aws_subnet.private_subnets: s.id[*]]
+  value = aws_subnet.private_subnets[*].id
 }
 
 output "private_route_table_id" {
