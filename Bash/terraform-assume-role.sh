@@ -3,17 +3,16 @@
 # Example: ./script.sh sandbox temp-session
 
 # global options
-PATTERN="$1"
-SESSION_ROLE="terraform"
-LOG_DIR="."
-
-# using timestamp for later tracing
-TIME_STAMP=$(date +"%H_%M_%d_%m_%y")
-
-# declare the role pattern (from aws)
+PATTERN="${1:-}"
+SESSION_PREFIX="${2:-terraform}"
+LOG_DIR="log-execution"
+TIME_STAMP=$(date +"%H_%M_%d_%m_%Y")
 ROLE_PATTERN="arn:aws:iam::account_id:role/OrganizationAccountAccessRole"
 
+set -euo pipefail
+
 assume_role () {
+  echo "[INFO] Searching for AWS account matching pattern: $PATTERN" >> "${LOG_DIR}-${TIME_STAMP}.log"
   # search through the organization list to check the account with matched pattern
   local account_id=$(aws organizations list-accounts --query 'Accounts[*].[Name, Id]' --output json \
   | jq -r --arg pat "$PATTERN" 'map(select(.[0] | test($pat; "i"))) | .[] | .[1]')
@@ -28,6 +27,10 @@ assume_role () {
   # echo $(aws sts assume-role \
   #   --role-arn "${role_to_assume}" \
   #   --role-session-name "${role_name}")
+  if [[ -z "$account_id" || "$account_id" == "null" ]]; then
+    echo "[ERROR] No account found matching pattern '$PATTERN'" >> "${LOG_DIR}-${TIME_STAMP}.error"
+    exit 1
+  fi
 
   CREDS_JSON=$(aws sts assume-role \
     --role-arn "${role_to_assume}" \
