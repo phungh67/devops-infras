@@ -9,8 +9,8 @@
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
                 "StringEquals": {
-                    "token.actions.githubusercontent.com:aud": "${cloud-provider-audience}",
-                    "token.actions.githubusercontent.com:sub": "repo:${github_org}/${github_repository}:ref:refs/heads/${github_branch}"
+                    "token.actions.githubusercontent.com:sub": "repo:${github_org}/${github_repository}:ref:refs/heads/${github_branch}",
+                    "token.actions.githubusercontent.com:aud": "${cloud_provider_audience}"
                 }
             }
         }

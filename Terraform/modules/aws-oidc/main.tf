@@ -20,7 +20,7 @@ data "template_file" "trust_policy_template_for_federated" {
     aws_account_id          = var.aws_account_id
     cloud_provider_audience = var.openid_provider_audience
     github_org              = var.github_org
-    github_repo             = var.github_repo
+    github_repository       = var.github_repo
     github_branch           = var.github_branch
   }
 }
@@ -28,7 +28,7 @@ data "template_file" "trust_policy_template_for_federated" {
 resource "aws_iam_policy" "trusted_entity_openid" {
   name        = "${var.res_prefix}-trusted-policy"
   description = "Allow OpenID from GitHub to assume role"
-  policy      = file(data.template_file.trust_policy_template_for_federated.rendered)
+  policy      = data.template_file.trust_policy_template_for_federated.rendered
 }
 
 data "aws_iam_policy" "trusted_policy" {
