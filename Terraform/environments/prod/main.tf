@@ -23,3 +23,15 @@ module "aws_compute" {
   common_key_name        = module.aws_common_key.aws_common_key
   private_route_table_id = module.aws_networking.private_route_table_id
 }
+
+module "aws_oidc" {
+  source                   = "../../modules/aws-oidc"
+  res_prefix               = var.res_prefix
+  main_region              = var.main_region
+  aws_account_id           = var.account_id
+  openid_provider_audience = var.openid_provider_audience
+  openid_provider_url      = var.openid_provider_url
+  github_branch            = var.github_branch
+  github_org               = var.github_org
+  github_repo              = var.github_repo
+}

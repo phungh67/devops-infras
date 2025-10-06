@@ -1,16 +1,13 @@
-# backend remote - s3
-variable "backend_bucket" {
-  description = "The default bucket for storing Terraform state"
-  type        = string
-  default     = "deu1-state-bucket"
-}
-
-# DynamoDB table (if have) to lock state
-
 variable "main_region" {
   description = "The main region to provide resources or the region which management resources are placed"
   type        = string
   default     = "us-east-1"
+}
+
+variable "account_id" {
+  description = "The ID of this AWS account"
+  type        = string
+  default     = "713881826090"
 }
 
 variable "az_list" {
@@ -53,4 +50,34 @@ variable "default_instance_types" {
   description = "A list of instance types that can be used for computing purpose"
   type        = list(string)
   default     = ["t2.micro", "t2.small", "t2.medium"]
+}
+
+variable "openid_provider_url" {
+  description = "The URL of provider, check official documentations for accurate URL"
+  type        = string
+  default     = "https://token.actions.githubusercontent.com"
+}
+
+variable "openid_provider_audience" {
+  description = "The audience - AWS service that is used to handled this provider"
+  type        = string
+  default     = "sts.amazonaws.com"
+}
+
+variable "github_org" {
+  description = "Owner of the github repository, either organization or personal"
+  type        = string
+  default     = "phungh67"
+}
+
+variable "github_repo" {
+  description = "Repository's name"
+  type        = string
+  default     = "devops-infras"
+}
+
+variable "github_branch" {
+  description = "The branch to assume this role for CI/CD, each branch should have a separate IAM entity"
+  type        = string
+  default     = "main"
 }
