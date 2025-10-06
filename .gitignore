@@ -2,8 +2,10 @@ Terraform/environments/*/.terraform/*
 Terraform/environments/*/.terraform*
 Terraform/environments/*/plan*
 Terraform/environments/*/*.state
+Terraform/environments/*/.local-state
 *.tfstate
 *.backup
 /.vscode
 Bash/*.log
+Bash/*.error
 Bash/*.env
