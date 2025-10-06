@@ -5,3 +5,5 @@ Terraform/environments/*/*.state
 *.tfstate
 *.backup
 /.vscode
+Bash/*.log
+Bash/*.env
