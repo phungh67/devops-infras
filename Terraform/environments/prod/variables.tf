@@ -73,11 +73,16 @@ variable "github_org" {
 variable "github_repo" {
   description = "Repository's name"
   type        = string
-  default     = "devops-infras"
+  default     = "devops-pet-projects"
 }
 
 variable "github_branch" {
   description = "The branch to assume this role for CI/CD, each branch should have a separate IAM entity"
   type        = string
   default     = "main"
+}
+
+variable "aws_github_policy_list" {
+  description = "The policies that should be attached for the GitHub role"
+  type        = list(string)
 }

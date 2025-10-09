@@ -29,6 +29,7 @@ module "aws_oidc" {
   res_prefix               = var.res_prefix
   main_region              = var.main_region
   aws_account_id           = var.account_id
+  aws_github_policy_list   = var.aws_github_policy_list
   openid_provider_audience = var.openid_provider_audience
   openid_provider_url      = var.openid_provider_url
   github_branch            = var.github_branch
