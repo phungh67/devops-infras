@@ -4,6 +4,7 @@ Terraform/environments/*/plan*
 Terraform/environments/*/*.state
 Terraform/environments/*/.local-state
 Terraform/environments/*/*-key
+Terraform/environments/*/.*
 *.tfstate
 *.backup
 /.vscode

@@ -36,7 +36,7 @@ data "template_file" "trust_policy_template_for_federated" {
 # }
 
 resource "aws_iam_role" "openid_github_role" {
-  name               = "${var.res_prefix}-openid-github-role"
+  name               = "${var.res_prefix}-openid-workflow-role"
   path               = "/"
   assume_role_policy = data.template_file.trust_policy_template_for_federated.rendered
 }

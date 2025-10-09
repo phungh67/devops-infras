@@ -1,18 +1,20 @@
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "Federated": "arn:aws:iam::${aws_account_id}:oidc-provider/token.actions.githubusercontent.com"
-            },
-            "Action": "sts:AssumeRoleWithWebIdentity",
-            "Condition": {
-                "StringEquals": {
-                    "token.actions.githubusercontent.com:sub": "repo:${github_org}/${github_repository}:ref:refs/heads/${github_branch}",
-                    "token.actions.githubusercontent.com:aud": "${cloud_provider_audience}"
-                }
-            }
-        }
-    ]
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Principal": {
+				"Federated": "arn:aws:iam::${aws_account_id}:oidc-provider/token.actions.githubusercontent.com"
+			},
+			"Action": "sts:AssumeRoleWithWebIdentity",
+			"Condition": {
+				"StringEquals": {
+					"token.actions.githubusercontent.com:aud": "${cloud_provider_audience}"
+				},
+				"StringLike": {
+					"token.actions.githubusercontent.com:sub": "repo:${github_org}/${github_repository}:environment:prod"
+				}
+			}
+		}
+	]
 }
