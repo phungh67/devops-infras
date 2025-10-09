@@ -41,6 +41,7 @@ resource "aws_iam_role" "openid_github_role" {
   assume_role_policy = data.template_file.trust_policy_template_for_federated.rendered
 }
 
+# attach permissions
 resource "aws_iam_role_policy_attachment" "openid_attachment" {
   count      = length(var.aws_github_policy_list)
   role       = aws_iam_role.openid_github_role.name

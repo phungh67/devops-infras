@@ -82,6 +82,7 @@ variable "github_branch" {
   default     = "main"
 }
 
+# premade permission
 variable "aws_github_policy_list" {
   description = "The policies that should be attached for the GitHub role"
   type        = list(string)
