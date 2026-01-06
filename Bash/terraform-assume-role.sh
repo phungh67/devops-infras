@@ -26,8 +26,8 @@ assume_role () {
   # echo $role_name
 
   # echo $(aws sts assume-role \
-  #   --role-arn "${role_to_assume}" \
-  #   --role-session-name "${role_name}")
+  #  --role-arn "${role_to_assume}" \
+  #  --role-session-name "${role_name}")
   if [[ -z "$account_id" || "$account_id" == "null" ]]; then
     echo "[ERROR][$LOG_TIME] No account found matching pattern '$PATTERN'" >> "${LOG_DIR}-${TIME_STAMP}.error"
     return
@@ -37,13 +37,13 @@ assume_role () {
     --role-arn "${role_to_assume}" \
     --role-session-name "${role_name}")
 
-  if [[ -z $CREDS_JSON ]]; then
+  if [[ -n $CREDS_JSON ]]; then
     echo "[INFO][$LOG_TIME] Successfully assume role with credentials" >> "${LOG_DIR}-${TIME_STAMP}.log"
   fi
 
-  export AWS_ACCESS_KEY_ID=$(echo "$CREDS_JSON" | jq -r '.Credentials.AccessKeyId')
-  export AWS_SECRET_ACCESS_KEY=$(echo "$CREDS_JSON" | jq -r '.Credentials.SecretAccessKey')
-  export AWS_SESSION_TOKEN=$(echo "$CREDS_JSON" | jq -r '.Credentials.SessionToken')
+  echo "export AWS_ACCESS_KEY_ID=$(echo "$CREDS_JSON" | jq -r '.Credentials.AccessKeyId')"
+  echo "export AWS_SECRET_ACCESS_KEY=$(echo "$CREDS_JSON" | jq -r '.Credentials.SecretAccessKey')"
+  echo "export AWS_SESSION_TOKEN=$(echo "$CREDS_JSON" | jq -r '.Credentials.SessionToken')"
 }
 
 
