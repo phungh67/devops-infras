@@ -1,41 +1,34 @@
-variable "res_prefix" {
-  description = "The prefix in resource's name to indicate environment and region"
+variable "default_region" {
+  description = "The region of this VPC"
   type        = string
-  default     = "due1"
 }
 
-variable "az_list" {
-  description = "The az that are associated with the region above"
-  type        = list(string)
-  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+variable "number_of_subnets" {
+  description = "The number of identical subnet that will be created for each layer"
+  type        = number
 }
 
-variable "main_cidr" {
-  description = "Main CIDR, assigned to the management or the main VPC"
+variable "number_of_layer" {
+  type        = number
+  description = "Number of layers: 1 (Public), 2 (Public+Private), 3 (Public+Private+Isolated)"
+}
+
+variable "original_cidr" {
+  description = "The CIDR for VPC, passed down for subnets"
   type        = string
-  default     = "10.0.0.0/16"
 }
 
-variable "private_subnets_cidr" {
-  description = "CIDR for several private subnets, default is a set of 3"
-  type        = list(string)
-  default     = ["10.0.11.0/24", "10.0.21.0/24", "10.0.31.0/24"]
+variable "group_name" {
+  description = "The group name for better naming"
+  type        = string
 }
 
-variable "public_subnets_cidr" {
-  description = "CIDR for several public subnets, default is a set of 3"
-  type        = list(string)
-  default     = ["10.0.10.0/24", "10.0.20.0/24", "10.0.30.0/24"]
+variable "nat_attached" {
+  description = "Determine if the AWS provided NAT is used"
+  type        = number
 }
 
-variable "database_subnets_cidr" {
-  description = "CIDR for several database subnets, default is a set of 3"
-  type        = list(string)
-  default     = ["10.0.12.0/24", "10.0.22.0/24", "10.0.32.0/24"]
-}
-
-variable "lb_type" {
-  description = "Type of the LB to provision"
-  type = list(string)
-  default = [ "application", "network" ]
+variable "dedicated_eip_for_nat" {
+  description = "Determine if want to use a dedicated EIP for NAT"
+  type        = number
 }
