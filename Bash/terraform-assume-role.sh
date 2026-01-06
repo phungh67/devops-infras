@@ -37,7 +37,7 @@ assume_role () {
     --role-arn "${role_to_assume}" \
     --role-session-name "${role_name}")
 
-  if [ -z $CREDS_JSON ]; then
+  if [[ -z $CREDS_JSON ]]; then
     echo "[INFO][$LOG_TIME] Successfully assume role with credentials" >> "${LOG_DIR}-${TIME_STAMP}.log"
   fi
 
